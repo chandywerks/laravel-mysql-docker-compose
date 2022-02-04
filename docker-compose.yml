@@ -2,7 +2,11 @@ version: '3'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        uid: 1000
+        gid: 1000
     image: php:8-laravel
     ports:
       - 8000:8000

@@ -11,19 +11,16 @@ RUN mv composer.phar composer
 RUN docker-php-ext-install pdo_mysql bcmath
 
 # user ids from env (linux default 1000)
-ARG UID=1000
-ARG GID=1000
-
-ENV UID=${UID}
-ENV GID=${GID}
-ENV USER=laravel
+ARG uid=1000
+ARG gid=1000
+ARG user=laravel
 
 # set user and group id
-RUN addgroup -g $GID --system $USER
-RUN adduser --disabled-password --home "/app" --ingroup "$USER" --uid "$UID" "$USER"
-RUN chown -R $USER:$USER /app
+RUN addgroup -g $gid --system $user
+RUN adduser --disabled-password --home "/app" --ingroup "$user" --uid "$uid" "$user"
+RUN chown -R $user:$user /app
 
-USER ${USER}
+USER $user
 
 # create default project and mv to home directory
 WORKDIR /app

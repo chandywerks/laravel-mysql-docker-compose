@@ -11,6 +11,13 @@ Run `docker-compose up` and go to [localhost:8000](http://localhost:8000)
 | `docker-compose exec db mysql`            | Interactive mysql shell
 | `docker-compose run app composer install` | Install [composer](https://getcomposer.org/doc/00-intro.md) libraries
 
+## Configure User
+
+Run `id` in your shell. Make sure your `uid` and `gid` match the build args in `docker-compose.yml` so that the docker file system permissions match the host user.
+
+If you change these settings run `docker-compose build` after.
+
+
 ## New Project
 
 *Run `docker-compose create` if you haven't brought the app container up yet*
