@@ -20,7 +20,7 @@ If you change these settings run `docker-compose build` after.
 
 ## New Project
 
-*Run `docker-compose create` if you haven't brought the app container up yet*
+*Run `docker-compose up --no-start` if you haven't brought the app container up yet*
 
 Copy the default project files from the `app` container in to a new directory
 
@@ -36,4 +36,18 @@ cd ../my-app
 docker-compose up
 ```
 
-You can set project specific [configuration](https://docs.docker.com/compose/compose-file/compose-file-v3/), such as `app` ports or `db` environment variables, in `docker-compose.override.yml`
+You can set project specific [configuration](https://docs.docker.com/compose/compose-file/compose-file-v3/) in `docker-compose.override.yml`
+
+## Initialize Database
+
+Put your SQL CREATE / INSERT commands into an .sql file(s) and mount it in the db container under `/docker-entrypoint-initdb.d/` in `docker-compose.override.yml`:
+
+Run `docker-compose rm db` to clear the database volume and re-initialize it with schema changes.
+
+**Example**
+
+```yml
+  db:
+    volumes:
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+```
