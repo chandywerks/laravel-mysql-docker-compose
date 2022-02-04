@@ -7,6 +7,9 @@ RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar composer
 
+# install php extensions for laravel and mysql
+RUN docker-php-ext-install pdo_mysql bcmath
+
 # user ids from env (linux default 1000)
 ARG UID=1000
 ARG GID=1000
